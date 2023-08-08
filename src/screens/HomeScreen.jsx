@@ -22,6 +22,13 @@ const HomeScreen = ({ navigation, route }) => {
         fetchPhotos()
     }, [])
 
+
+    const keyExtractor = (item) => item.id.toString()
+    const renderItem = ({ item }) => (
+        <TouchableOpacity onPress={() => navigation.navigate('Details', { id: item.id, pageName: 'details' })}>
+            <Photo item={item} />
+        </TouchableOpacity>)
+
     if (isLoading) {
         return <Loader />
     }
@@ -34,21 +41,16 @@ const HomeScreen = ({ navigation, route }) => {
             </Header>
 
             {Error ? <Text style={styles.warningText}>Something went wrong!</Text>
-                : (photos.length > 0
-                    ? <FlatList
-                        horizontal={false}
-                        numColumns={3}
-                        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPhotos} />}
-                        style={styles.container}
-                        data={photos}
-                        renderItem={({ item }) =>
-                            <TouchableOpacity onPress={() => navigation.navigate('Details', { id: item.id, pageName: 'details' })}>
-                                <Photo item={item} />
-                            </TouchableOpacity>
-                        }>
-                    </FlatList>
-                    : <Text style={styles.warningText}>There are no photos for the requested and / or camera request!</Text>
-                )
+                : <FlatList
+                    horizontal={false}
+                    numColumns={3}
+                    refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPhotos} />}
+                    style={styles.container}
+                    data={photos}
+                    keyExtractor={keyExtractor}
+                    renderItem={renderItem}
+                    ListEmptyComponent={<Text style={styles.warningText}>There are no photos for the requested and / or camera request!</Text>}
+                />
             }
         </View>
     )
