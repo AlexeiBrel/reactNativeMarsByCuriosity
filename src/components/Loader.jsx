@@ -9,7 +9,6 @@ export const Loader = () => {
                 alignItems: 'center',
             }}>
             <ActivityIndicator size="large" />
-            <Text style={{ marginTop: 10, color: '#000000' }}>Loading</Text>
         </View>
     );
 };

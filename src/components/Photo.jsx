@@ -1,13 +1,14 @@
 import { Image, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { memo } from 'react'
 
-const Photo = (props) => {
+
+const Photo = memo((props) => {
     return (
         <Image
             style={styles.img}
             source={{ uri: `${props.item.img_src}` }} />
     )
-}
+})
 
 export default Photo
 
