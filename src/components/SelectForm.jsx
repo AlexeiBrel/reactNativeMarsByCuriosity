@@ -2,6 +2,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Pressable, 
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { usePhotos } from '../context/photosContext'
 
 
 const dataCamera = [
@@ -17,6 +18,7 @@ const dataCamera = [
 ]
 
 const SelectForm = ({ navigation }) => {
+    const { setPhotos } = usePhotos()
     const [camera, setCamera] = useState({})
     const [date, setDate] = useState(new Date())
     const [showPicker, setShowPicker] = useState(false)
@@ -42,6 +44,11 @@ const SelectForm = ({ navigation }) => {
         } else {
             toggleDatePicker()
         }
+    }
+
+    const sendData = () => {
+        navigation.navigate('Home', { pageName: 'home', camera, date: formatTime })
+        setPhotos([])
     }
 
     return (
@@ -104,7 +111,7 @@ const SelectForm = ({ navigation }) => {
                         />
                     }
                 </View>
-                <TouchableOpacity style={styles.formBtn} onPress={() => navigation.navigate('Home', { pageName: 'home', camera, date: formatTime })}>
+                <TouchableOpacity style={styles.formBtn} onPress={sendData}>
                     <Text style={styles.btnText}>Explore</Text>
                 </TouchableOpacity>
             </View>

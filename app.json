@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alexeibrel.MarsByCuriosity"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +32,12 @@
       "eas": {
         "projectId": "2446d9d7-a2cf-4086-8800-a04f31b0f458"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2446d9d7-a2cf-4086-8800-a04f31b0f458"
     }
   }
 }

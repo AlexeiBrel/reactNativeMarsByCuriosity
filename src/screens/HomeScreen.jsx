@@ -57,8 +57,8 @@ const HomeScreen = ({ navigation, route }) => {
                 <Text style={styles.headerDate}>{date.utsString}</Text>
             </Header>
 
-            {photos.length > 0 ? (
-                <FlatList
+            {photos.length > 0
+                ? <FlatList
                     horizontal={false}
                     numColumns={3}
                     // refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchPhotos} />}
@@ -69,12 +69,11 @@ const HomeScreen = ({ navigation, route }) => {
                     onEndReached={loadMorePhotos}
                     onEndReachedThreshold={0.25}
                 />
-            ) : (
-                <View style={styles.noDataContainer}>
+                : <View style={styles.noDataContainer}>
                     <Text style={styles.warningText}>No photos found for the selected date and/or camera!</Text>
                 </View>
-            )}
-            {isLoading && <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />}
+            }
+            {isLoading && <ActivityIndicator size="large" color="#000" style={styles.loader} />}
         </View>
     )
 }
@@ -120,6 +119,7 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: '600',
         lineHeight: 22,
+        textAlign: 'center'
     },
 
     headerDate: {
