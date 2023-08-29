@@ -18,7 +18,7 @@ const Header = ({ children, ...props }) => {
                 {children}
             </View>
             {props.pageName !== 'select' && props.pageName !== 'home'
-                ? <TouchableOpacity>
+                ? <TouchableOpacity onPress={props.onShare}>
                     <Image
                         style={styles.headerImg}
                         resizeMode="contain"

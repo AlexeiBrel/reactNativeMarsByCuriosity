@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Share, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { usePhotos } from '../context/photosContext'
 
@@ -7,13 +7,24 @@ import Header from '../components/Header'
 const DetailsScreen = ({ navigation, route }) => {
     const { id, pageName } = route.params
     const { photos } = usePhotos()
-
-
     const photoItem = photos.find(item => item.id === id)
+
+
+    const onShare = async () => {
+        try {
+
+            await Share.share({
+                message: photoItem.img_src,
+            });
+
+        } catch (error) {
+            Alert.alert(error.message);
+        }
+    };
 
     return (
         <View style={styles.wrap}>
-            <Header navigation={navigation} pageName={pageName}>
+            <Header navigation={navigation} pageName={pageName} onShare={onShare}>
                 <Text style={styles.headerDate}>Photo id</Text>
                 <Text style={styles.headerTitle}>{id}</Text>
             </Header>
@@ -21,9 +32,7 @@ const DetailsScreen = ({ navigation, route }) => {
                 <Image
                     style={styles.mainImg}
                     resizeMode="cover"
-                    source={{
-                        uri: `${photoItem.img_src}`,
-                    }}
+                    source={{ uri: `${photoItem.img_src}`, }}
                 />
             </View>
         </View>
